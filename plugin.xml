@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="mobi.pushapps.plugins.PushWooshCordova"
+    version="2.4.0">
+
+  <name>PushAppsPushWooshCordova</name>
+	<author>PushApps</author>
+
+	<description>
+		Cordova plugin which integrates the PushApps SDK into any app, that are using the PushWoosh Cordova plugin.
+	</description>
+
+	<license>MIT</license>
+
+    <preference name="PA_SDK_KEY" />
+
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
+	</engines>
+
+	<!-- android -->
+	<platform name="android">
+        <config-file>
+            <access origin="*.pushapps.mobi" />
+        </config-file>
+        
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PushAppsPlugin" >
+                <param name="android-package" value="mobi.pushapps.plugins.pushwoosh.PushAppsPlugin"/>
+            </feature>
+        </config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+            android:name="mobi.pushapps.PAActivity"
+            android:configChanges="orientation|keyboardHidden" />
+            
+            <meta-data
+            android:name="PushApps_SdkKey"
+            android:value="$PA_SDK_KEY" />
+            <receiver
+                android:name="mobi.pushapps.sync.PASyncConfigurationReceiver"
+                android:enabled="true" >
+                <intent-filter>
+                    <action android:name="mobi.pushapps.sync.SYNC_CONFIGURATIONS" />
+                </intent-filter>
+            </receiver>
+            <receiver
+                android:name="mobi.pushapps.sync.PASyncRecommendationsReceiver"
+                android:enabled="true" >
+                <intent-filter>
+                    <action android:name="mobi.pushapps.sync.SYNC_RECOMMENDATIONS" />
+                </intent-filter>
+            </receiver>
+            <receiver
+                android:name="mobi.pushapps.events.PASyncEventsReceiver"
+                android:enabled="true" >
+                <intent-filter>
+                    <action android:name="mobi.pushapps.events.SYNC_EVENTS" />
+                </intent-filter>
+            </receiver>
+            <service android:name="mobi.pushapps.plugins.pushwoosh.CustomPushWooshIntentService" />
+            
+            <meta-data
+                android:name="PW_PUSH_SERVICE"
+                android:value="mobi.pushapps.plugins.pushwoosh.CustomPushWooshIntentService" />
+		</config-file>
+
+        <source-file src="src/android/libs/pushapps.jar" target-dir="libs/" />
+        
+        <source-file src="src/android/mobi/pushapps/plugins/pushwoosh/CustomPushWooshIntentService.java" target-dir="src/mobi/pushapps/plugins/pushwoosh/" />
+        <source-file src="src/android/mobi/pushapps/plugins/pushwoosh/PushAppsPlugin.java" target-dir="src/mobi/pushapps/plugins/pushwoosh/" />
+
+        <source-file src="src/android/res/pushapps_small.xml" target-dir="res/layout/" />
+        <source-file src="src/android/res/pushapps_content1.xml" target-dir="res/layout/" />
+        <source-file src="src/android/res/pushapps_content2.xml" target-dir="res/layout/" />
+        <source-file src="src/android/res/pushapps_action_buttons1.xml" target-dir="res/layout/" />
+        <source-file src="src/android/res/pushapps_action_buttons2.xml" target-dir="res/layout/" />
+
+	</platform>
+
+</plugin>
