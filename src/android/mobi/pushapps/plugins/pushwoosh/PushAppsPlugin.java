@@ -1,10 +1,6 @@
 package mobi.pushapps.plugins.pushwoosh;
 
-import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-
 import mobi.pushapps.PushApps;
 
 import org.apache.cordova.CallbackContext;
@@ -12,10 +8,7 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
+import com.pushwoosh.PushManager;
 
 /**
  * @author PushApps
