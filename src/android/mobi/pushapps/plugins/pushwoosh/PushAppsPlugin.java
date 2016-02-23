@@ -42,6 +42,9 @@ public class PushAppsPlugin extends CordovaPlugin {
         super.initialize(cordova, webView);
         
         PushApps.register(getApplicationContext());
+        
+        PushManager pushManager = PushManager.getInstance(getApplicationContext());
+        pushManager.setNotificationFactory(new PushAppsNotificationFactory());
     }
     
     @Override

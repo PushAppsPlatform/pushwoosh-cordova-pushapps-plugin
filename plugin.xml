@@ -60,16 +60,11 @@
                     <action android:name="mobi.pushapps.events.SYNC_EVENTS" />
                 </intent-filter>
             </receiver>
-            <service android:name="mobi.pushapps.plugins.pushwoosh.CustomPushWooshIntentService" />
-            
-            <meta-data
-                android:name="PW_PUSH_SERVICE"
-                android:value="mobi.pushapps.plugins.pushwoosh.CustomPushWooshIntentService" />
 		</config-file>
 
         <source-file src="src/android/libs/pushapps.jar" target-dir="libs/" />
         
-        <source-file src="src/android/mobi/pushapps/plugins/pushwoosh/CustomPushWooshIntentService.java" target-dir="src/mobi/pushapps/plugins/pushwoosh/" />
+        <source-file src="src/android/mobi/pushapps/plugins/pushwoosh/PushAppsNotificationFactory.java" target-dir="src/mobi/pushapps/plugins/pushwoosh/" />
         <source-file src="src/android/mobi/pushapps/plugins/pushwoosh/PushAppsPlugin.java" target-dir="src/mobi/pushapps/plugins/pushwoosh/" />
 
         <source-file src="src/android/res/pushapps_small.xml" target-dir="res/layout/" />
